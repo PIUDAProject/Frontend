@@ -1,31 +1,51 @@
-# 온길(piuda) Frontend — 프로젝트 핵심
+# Ongil(piuda) Frontend — Project Core
 
-## 프로젝트 정체
+## Project Identity
 
-- 한국 복약 관리 앱 "온길(piuda)"의 Next.js 프론트엔드
-- 주 사용자: 부모님 세대 복약을 관리하는 보호자
-- 핵심 기능: 한국 의약품 API 조회, 복약 일정, OCR 처방전 인식, 전화 알림
+- Next.js frontend for Korean medication management app "Ongil(piuda)"
+- Primary user: caregiver managing elderly parents' medication
+- Core features: Korean drug API lookup, medication schedule, OCR prescription recognition, phone alerts
+- Platform: mobile-first web app
 
-## 소스 맵
+## Current Source Map (as of 2026-05)
 
 ```
-E:\piudaFront\Frontend\
-├── src/
-│   └── app/                 # Next.js App Router
-│       ├── layout.tsx       # 루트 레이아웃 (Geist 폰트 적용)
-│       ├── page.tsx         # 홈 페이지 (현재 보일러플레이트)
-│       └── globals.css      # Tailwind v4 @import + CSS 변수
-├── next.config.ts           # React Compiler 활성화
-├── tsconfig.json            # paths: @/* → ./src/*
-├── eslint.config.mjs        # next/core-web-vitals + typescript + prettier
-└── .prettierrc              # 코드 포맷 설정
+src/
+└── app/
+    ├── layout.tsx   ← RootLayout, Geist fonts, lang="en" (⚠️ not yet changed to "ko")
+    ├── page.tsx     ← Home page (⚠️ Create Next App boilerplate not yet cleaned up)
+    ├── globals.css  ← Tailwind v4 @import + @theme inline CSS variables
+    └── favicon.ico
 ```
 
-## 프로젝트 불변 규칙
+## Planned Directories (not yet created — create when implementing features)
 
-- `@/*` 경로 alias는 `./src/*`를 가리킴
-- 폰트: Geist Sans (`--font-geist-sans`) / Geist Mono (`--font-geist-mono`)
-- CSS 변수: `--background`, `--foreground` (다크모드 자동 지원)
-- React Compiler 활성화 → memo/useMemo/useCallback 수동 최적화 불필요
+| Path              | Role                                                  |
+| ----------------- | ----------------------------------------------------- |
+| `src/components/` | Shared UI components (feature-based or Atomic Design) |
+| `src/lib/`        | Utility / helper functions                            |
+| `src/hooks/`      | Custom React hooks                                    |
+| `src/types/`      | Shared TypeScript types                               |
+| `src/api/`        | API client layer (Korean drug API)                    |
 
-세부 내용: `mem:tech_stack`, `mem:conventions`, `mem:suggested_commands`, `mem:task_completion`
+## Project Invariants
+
+- `@/` path alias → `./src/*` (tsconfig paths)
+- Font variables: `--font-geist-sans`, `--font-geist-mono`
+- CSS variables: `--background`, `--foreground` (automatic dark mode)
+- React Compiler enabled → no manual `memo`/`useMemo`/`useCallback`
+- HTML lang must be `"ko"` (not yet fixed in layout.tsx)
+
+## Outstanding Issues (initial boilerplate)
+
+- [ ] `src/app/layout.tsx` `lang="en"` → `lang="ko"`
+- [ ] `src/app/layout.tsx` metadata.title / description → update for Ongil app
+- [ ] `src/app/page.tsx` Replace Create Next App boilerplate with actual home UI
+
+## Memory Reference Structure
+
+- Version · stack · Tailwind v4 · React Compiler caveats → `mem:tech_stack`
+- Language rules · format · file structure · Server/Client criteria · domain terms → `mem:conventions`
+- Compound component · no boolean props · Context interface · React 19 API → `mem:react_patterns`
+- pnpm / ESLint / Prettier / git commands → `mem:suggested_commands`
+- Task completion checklist · new file validation → `mem:task_completion`

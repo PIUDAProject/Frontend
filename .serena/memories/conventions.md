@@ -1,34 +1,94 @@
-# 코드 컨벤션
+# Code Conventions
 
-## 언어 규칙
+## Language Rules
 
-- **주석**: 한국어
-- **변수명/함수명**: 영어 (camelCase)
-- **컴포넌트명**: PascalCase
-- `any` 타입 금지 — 정확한 타입 명시
-- 매직 넘버/문자열 금지 → 상수 추출
+- **Comments**: Korean
+- **Variable/function names**: English (camelCase)
+- **Component names**: PascalCase
+- **File names**: kebab-case (`medication-card.tsx`) or PascalCase (standalone component files)
+- No `any` types — specify exact types
+- No magic numbers/strings → extract as constants (`const` at top of file)
+- Single responsibility principle per function
 
-## 포맷 규칙 (.prettierrc)
+## Format Rules (.prettierrc)
 
 - `singleQuote: true`, `semi: true`, `tabWidth: 2`, `printWidth: 100`
 - `trailingComma: "all"`, `arrowParens: "always"`, `endOfLine: "lf"`
-- Import 자동 정렬: `prettier-plugin-organize-imports`
-- Tailwind 클래스 자동 정렬: `prettier-plugin-tailwindcss`
+- Auto-sort imports: `prettier-plugin-organize-imports`
+- Auto-sort Tailwind classes: `prettier-plugin-tailwindcss`
 
-## React/Next.js 패턴
+## React Composition Patterns
 
-- React Compiler 활성화 → `memo`, `useMemo`, `useCallback` 수동 최적화 불필요
-- App Router 사용 — `src/app/` 디렉토리 기준
-- 경로 import: `@/` prefix 사용 (예: `@/components/Button`)
-- Server Component 기본, 클라이언트 상태 필요 시만 `'use client'` 추가
+Compound components · no boolean props · Context interface · Provider state lifting · React 19 API →
+full rules and code examples: `mem:react_patterns`
 
-## 보안
+## Server vs Client Component Decision Criteria
 
-- 시크릿/API 키 하드코딩 금지 → 환경 변수
-- `localStorage`에 인증 토큰 저장 금지 → HttpOnly 쿠키
-- 입력값 서버에서 검증
+```
+Server Component (default) ← start here unless there's a reason not to
+  ├── data fetching (direct async/await)
+  ├── direct DB/API access
+  └── sensitive data handling
 
-## 도메인 용어
+'use client' only when needed
+  ├── useState / useReducer
+  ├── useEffect / browser APIs
+  ├── onClick / onChange event handlers
+  └── third-party client-only libraries
+```
 
-- 약물(drug/medication), 복약(take/dose), 처방전(prescription), 알림(notification)
-- 한국 의약품 API 연동 예정
+- Place `'use client'` boundary as far down the tree as possible (leaf nodes) — avoid hoisting to top
+
+## Component File Order
+
+```tsx
+'use client'          // only when needed
+
+import ...            // auto-sorted by Prettier
+
+// types/interfaces
+interface Props { ... }
+
+// constants
+const MAX_ITEMS = 10;
+
+// component body
+export default function ComponentName({ ... }: Props) { ... }
+```
+
+## CSS / Tailwind v4
+
+- `@import "tailwindcss"` in `globals.css`
+- CSS variable naming: `--{category}-{variant}` (e.g. `--color-primary`, `--font-geist-sans`)
+- Theme customization in `@theme inline { ... }` block
+- Do NOT create `tailwind.config.js` (conflicts with v4)
+
+## Mobile-First UI Patterns (Ongil app)
+
+- Base layout: `max-w-[390px]` (iPhone 14 baseline) centered
+- Minimum touch target: `min-h-[44px]` (iOS HIG standard)
+- Bottom sheet: `fixed bottom-0` + `translate-y` animation pattern
+- Safe area: `pb-[env(safe-area-inset-bottom)]` (notch support)
+
+## Path Imports
+
+- Use `@/` prefix (e.g. `@/components/MedicationCard`)
+- Avoid relative paths (`../`) — except within the same directory
+
+## Security
+
+- No hardcoded secrets/API keys → `.env.local`
+- No auth tokens in `localStorage` → HttpOnly cookies
+- Validate inputs server-side
+
+## Domain Terms (English consistency)
+
+| Korean      | English                  |
+| ----------- | ------------------------ |
+| 약물        | `drug` / `medication`    |
+| 복약        | `take` / `dose`          |
+| 처방전      | `prescription`           |
+| 알림        | `notification`           |
+| 보호자      | `guardian` / `caregiver` |
+| 복용 시간대 | `scheduleTime`           |
+| 약물 이력   | `medicationHistory`      |

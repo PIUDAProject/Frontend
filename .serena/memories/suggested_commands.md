@@ -1,37 +1,55 @@
-# 주요 명령어 (Windows PowerShell 환경)
+# Key Commands (Windows PowerShell)
 
-## 개발
-
-```powershell
-pnpm dev          # 개발 서버 시작 (Next.js)
-pnpm build        # 프로덕션 빌드
-pnpm start        # 프로덕션 서버 시작 (build 후)
-```
-
-## 코드 품질
+## Development
 
 ```powershell
-pnpm lint              # ESLint 검사
-pnpm type-check        # TypeScript 타입 검사 (tsc --noEmit)
-pnpm format            # Prettier로 전체 포맷 (--write)
-pnpm format:check      # Prettier 포맷 확인만 (--check)
+pnpm dev            # start dev server (default port 3000)
+pnpm build          # production build
+pnpm start          # start production server (after build)
 ```
 
-## 패키지 관리 (pnpm 전용)
+## Code Quality (run in order after completing work)
 
 ```powershell
-pnpm install           # 의존성 설치
-pnpm add <pkg>         # 패키지 추가
-pnpm add -D <pkg>      # devDependency 추가
+pnpm type-check     # check TypeScript errors (tsc --noEmit)
+pnpm lint           # check ESLint violations
+pnpm format:check   # check Prettier format mismatches
+pnpm format         # auto-fix Prettier format (--write)
 ```
 
-## Git (pre-commit 훅 자동 실행)
+## Package Management (pnpm only — no npm/yarn)
 
-- `git commit` 시 lint-staged 자동 실행: ESLint fix → Prettier write
-- 대상: `*.{ts,tsx,js,jsx}` (ESLint+Prettier), `*.{css,json,md}` (Prettier)
+```powershell
+pnpm install                # install dependencies
+pnpm add <pkg>              # add runtime package
+pnpm add -D <pkg>           # add devDependency
+pnpm remove <pkg>           # remove package
+pnpm why <pkg>              # show dependency path
+```
 
-## Windows 특이사항
+## Git (pre-commit hook runs automatically)
 
-- 경로 구분자: `\` (PowerShell 기본)
-- 줄 끝: LF 강제 (`.prettierrc` endOfLine: "lf")
-- 환경 변수: `$env:VAR_NAME` 형식 사용
+```powershell
+git add <files>
+git commit -m "feat: add medication alert component"
+```
+
+- `git commit` triggers lint-staged:
+  - `*.{ts,tsx,js,jsx}` → `eslint --fix` → `prettier --write`
+  - `*.{css,json,md}` → `prettier --write`
+- Commit messages: Korean, single purpose
+- Format: `feat:` `fix:` `refactor:` `style:` `chore:` `docs:` `test:`
+
+## Debugging TypeScript Errors
+
+```powershell
+pnpm type-check 2>&1 | Select-String "error"   # filter errors only
+```
+
+## Windows Specifics
+
+- Path separator: `\` (PowerShell), Next.js internals use `/`
+- Line endings: LF enforced (`.prettierrc` `endOfLine: "lf"`)
+- Env vars: `$env:NEXT_PUBLIC_API_URL` format
+- Stop dev server: `Ctrl+C`
+- `.env.local` is git-ignored — must be created manually

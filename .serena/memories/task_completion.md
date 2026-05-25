@@ -1,28 +1,60 @@
-# 작업 완료 체크리스트
+# Task Completion Checklist
 
-## 코딩 작업 완료 시 필수 실행 순서
-
-```powershell
-pnpm type-check    # TypeScript 오류 없음 확인
-pnpm lint          # ESLint 규칙 위반 없음 확인
-pnpm format:check  # Prettier 포맷 일치 확인
-```
-
-## 오류 시 자동 수정
+## Required Steps After Completing Code Work
 
 ```powershell
-pnpm format        # Prettier 포맷 자동 수정
-pnpm lint          # ESLint 자동 수정 (lint-staged에서 --fix 적용)
+pnpm type-check     # confirm no TypeScript errors
+pnpm lint           # confirm no ESLint violations
+pnpm format:check   # confirm Prettier format matches
 ```
 
-## Git 커밋 전
-
-- pre-commit 훅(Husky + lint-staged)이 자동으로 ESLint fix + Prettier 실행
-- 커밋 메시지: 한국어, 단일 목적
-- 형식: `feat:`, `fix:`, `refactor:`, `style:`, `chore:`, `docs:`, `test:`
-
-## 빌드 검증 (배포 전)
+On error:
 
 ```powershell
-pnpm build         # 프로덕션 빌드 성공 확인
+pnpm format         # auto-fix format
+pnpm lint           # recheck ESLint
 ```
+
+## Checklist When Adding New Files/Components
+
+- [ ] Using `@/` import alias (avoid relative `../`)
+- [ ] Confirmed Server Component vs `'use client'` decision
+- [ ] No `any` types
+- [ ] Magic numbers/strings extracted as constants
+- [ ] No unnecessary `memo`/`useMemo`/`useCallback` with React Compiler active
+- [ ] Mobile-first layout (touch targets `min-h-[44px]` or larger)
+- [ ] Korean comments, English variable/function names
+
+## Server/Client Component Verification
+
+`'use client'` required:
+
+- `useState`, `useReducer`, `useEffect`
+- Event handlers (`onClick`, `onChange`, etc.)
+- Browser APIs (window, localStorage, etc.)
+- External client-only libraries
+
+`'use client'` not needed (keep as Server Component):
+
+- Data fetching (async/await)
+- Direct DB/API calls
+- Static UI rendering
+
+## Build Validation (before deploy)
+
+```powershell
+pnpm build          # confirm production build succeeds
+```
+
+## Outstanding Boilerplate (priority fixes)
+
+- [ ] `src/app/layout.tsx`: `lang="en"` → `lang="ko"`
+- [ ] `src/app/layout.tsx`: update metadata title/description for Ongil app
+- [ ] `src/app/page.tsx`: replace Create Next App boilerplate with actual home UI
+
+## Before Git Commit
+
+- Confirm Husky + lint-staged pre-commit hook runs
+- Commit messages: Korean, single purpose
+- Format: `feat:` `fix:` `refactor:` `style:` `chore:` `docs:` `test:`
+- One commit, one purpose

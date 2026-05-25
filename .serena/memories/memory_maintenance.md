@@ -2,32 +2,65 @@
 
 ## Discovery Model
 
-- Core principle: progressive discovery through references, building a graph of memories.
-- Initially, agents are provided with the list of all memories (names only).
-- Agents should read `mem:core` as the top-level entry point (graph root).
-  This memory should contain references to other memories covering major project domains.
-  The referenced memories shall, in turn, shall contain references to even more specific memories, and so on.
-  The depth of the graph shall depend on the project complexity.
-- Use topics/folders to group related memories in order to make the content structure explicit.
-  Folders can mirror project structure (e.g. modules like frontend/backend) or topics like debugging, architecture, etc.
-- Memory references must use a mem: prefix inside backticks, e.g. `mem:frontend/core`.
-  The surrounding text should clearly indicate when to read the memory/which content to expect.
-  The text should provide more precise guidance than the memory name alone,
-  i.e. avoid a reference like "frontend debugging: `mem:frontend/debugging` and instead make clear which aspects of frontend debugging are covered.
-- Memories themselves should not contain information about when to read them; this is the responsibility of the referring memory.
+- Agent receives only a **name list** at startup — must read content explicitly
+- Use `mem:core` as the graph root — starting point for all exploration
+- `core` references major domain memories → each references more specific ones (hierarchical graph)
+- Memories must NOT state when they should be read — that is the responsibility of the referring memory
+- References must use `` `mem:NAME` `` format (backtick + `mem:` prefix)
+
+## Reference Rules
+
+- Use `` `mem:NAME` `` format — auto-updated on rename
+- Reference text should specifically describe the target memory's content
+  - ❌ See `mem:conventions`
+  - ✅ Language rules · domain terms · Server/Client decision criteria → `mem:conventions`
+- References to not-yet-existing memories are allowed (marks planned future content)
+
+## Memory Scopes
+
+| Scope   | Path                         | Shared With                         |
+| ------- | ---------------------------- | ----------------------------------- |
+| Project | `.serena/memories/`          | This project only (git-committable) |
+| Global  | `~/.serena/memories/global/` | All projects                        |
+
+- Global memory names: `global/` prefix (e.g. `global/coding-style`)
+- Project and global memories can be combined
+
+## Topic (Folder) Structure
+
+- Use `/` in memory name → maps to subdirectory (e.g. `modules/api`, `debug/auth`)
+- Group related memories by topic for structured exploration
 
 ## Style
 
-Dense agent notes, not prose docs. Prefer invariants, terse bullets.
-Avoid obvious context, rationale, and examples unless they prevent likely mistakes.
-Keep guidance durable and generalizable, not task-local.
+Dense agent notes — no prose. Prefer invariants and terse bullets.
+Omit obvious context, rationale, and examples. Keep guidance durable and generalizable.
 
-## Add/update threshold
+## Add/Update Threshold
 
-Add or update memories only with stable, non-obvious project conventions that avoid complex rediscovery in the future.
-Do not add: quick-read facts; generic language/framework knowledge; one-off task notes; volatile line-level details; behavior likely to change soon.
+Add or update only **stable, non-obvious project conventions** that prevent complex rediscovery.
+
+Do NOT add:
+
+- Quick-read facts
+- Generic language/framework knowledge
+- One-off task notes
+- Volatile implementation details likely to change soon
+- Line-level code details
 
 ## Maintenance Actions
 
-- Renaming memories: References are updated automatically if handled via Serena's memory rename tool.
-- Checking for stale memories (e.g. after deletion): Call `serena memories check` for a report.
+```shell
+# Check referential integrity (detect broken mem: references)
+serena memories check
+
+# Auto-add missing mem: prefixes (run --dry-run first)
+serena memories auto-prefix-references --dry-run
+serena memories auto-prefix-references
+
+# Reinitialize memory_maintenance from template
+serena memories initialize
+```
+
+- Rename via Serena's `rename_memory` tool → `` `mem:OLD` `` references auto-updated
+- After deletion, check stale references: `serena memories check`
