@@ -1,64 +1,50 @@
 # Tech Stack
 
-## Core Runtime
+## Runtime & Framework
 
-| Package                     | Version              | Notes                                                                          |
-| --------------------------- | -------------------- | ------------------------------------------------------------------------------ |
-| next                        | 16.2.6               | ⚠️ Breaking changes — check `node_modules/next/dist/docs/` before writing code |
-| react / react-dom           | 19.2.4               | Server Components, `use()` hook, Actions API                                   |
-| typescript                  | ^5 (5.9.3 installed) | strict, moduleResolution: bundler                                              |
-| babel-plugin-react-compiler | 1.0.0                | `reactCompiler: true` in `next.config.ts`                                      |
+- **Next.js 16.2.6** — App Router. Breaking changes from prior versions. Always check `node_modules/next/dist/docs/` before writing routing/data-fetching code.
+- **React 19.2.4** — React Compiler enabled (`reactCompiler: true` in next.config.ts). `ref` is a plain prop — do NOT use `forwardRef` in new code.
+- **TypeScript 5** — strict mode assumed
 
-## Tailwind CSS v4 — Fundamentally Different from v3
+## UI Library
 
-- **No `tailwind.config.js`** (v3 approach forbidden)
-- Single `@import "tailwindcss"` line in `globals.css`
-- PostCSS plugin: `@tailwindcss/postcss` (v4-specific)
-- Theme customization: `@theme inline { --color-xxx: ...; }` block
-- Defined CSS variables: `--background`, `--foreground`, `--font-sans`, `--font-mono`
+- **shadcn/ui** — style: "new-york", RSC: true, iconLibrary: "lucide"
+- Components live in `src/components/ui/` — never edit these files, wrap them
+- Custom ongil compositions go in `src/components/ongil/`
 
-## React Compiler Constraints (Important)
+## Styling
 
-- Manual `memo`, `useMemo`, `useCallback` **forbidden** — compiler handles automatically
-- Adding manual memoization causes double-memoization side effects
+- **Tailwind CSS v4** — CSS-first, no `tailwind.config.js`
+- `globals.css` structure: `@import "tailwindcss"` → `@import "tw-animate-css"` → `:root {}` (primitives+semantic) → `@theme inline {}` (utilities) → `@utility` (elevation, kr-wrap) → `@layer base` → `@layer components`
+- **`@plugin` is for JS plugins only** — CSS-only packages like `tw-animate-css` must use `@import`, not `@plugin`
+- All design tokens in `globals.css @theme inline`, accessible as Tailwind utilities
 
-## TypeScript Key Config (tsconfig.json)
+## Installed Packages (key)
 
-```json
-{
-  "strict": true,
-  "moduleResolution": "bundler",
-  "target": "ES2017",
-  "jsx": "react-jsx",
-  "isolatedModules": true,
-  "incremental": true,
-  "paths": { "@/*": ["./src/*"] }
-}
-```
+- `lucide-react` — icons only, strokeWidth=1.8. Never emoji as icons.
+- `clsx` + `tailwind-merge` → `cn()` in `src/lib/utils.ts`
+- `class-variance-authority` — CVA for new component variants
+- `tw-animate-css` — animation utilities (imported via `@import`)
+- `sonner` — toasts, mounted in layout.tsx as `<Toaster position="top-center" richColors closeButton />`
+- `vaul` — drawer (used by shadcn Drawer component)
+- `@radix-ui/react-dialog`, `@radix-ui/react-slot` — shadcn primitives
 
-- `isolatedModules: true` → per-file compilation, `const enum` not allowed
+## Package Manager
 
-## React 19 Notable APIs
+- **pnpm only** — never npm or yarn
 
-- `use()` hook: reads Promise / Context, can be called conditionally
-- Server Actions: `"use server"` directive for direct server function calls
-- Built-in resource hints: `ReactDOM.preload()`, `ReactDOM.preconnect()`
-- `useOptimistic()`: built-in optimistic UI updates
+## Font
 
-## Build / Package
+- **Pretendard Variable** — self-hosted at `public/fonts/PretendardVariable.woff2`
+- Loaded via `next/font/local`, CSS variable `--font-pretendard`
+- Weight range: 45–920 (variable axis). 2MB full file — subset with glyphhanger if performance needed.
 
-- **pnpm only** (no npm/yarn, lockfile: `pnpm-lock.yaml`)
-- `pnpm add <pkg>` / `pnpm add -D <pkg>`
+## Key Design Tokens (globals.css @theme inline)
 
-## Code Quality Tools
-
-| Tool                             | Version | Config File                                |
-| -------------------------------- | ------- | ------------------------------------------ |
-| ESLint                           | ^9      | `eslint.config.mjs` (flat config)          |
-| Prettier                         | ^3.8.3  | `.prettierrc`                              |
-| prettier-plugin-organize-imports | ^4.3.0  | auto-sorts imports                         |
-| prettier-plugin-tailwindcss      | ^0.8.0  | auto-sorts Tailwind classes                |
-| Husky                            | ^9.1.7  | pre-commit hook                            |
-| lint-staged                      | ^17.0.5 | `.{ts,tsx,js,jsx}` → ESLint fix → Prettier |
-
-Code rules · file structure · domain terms → `mem:conventions`
+**shadcn semantic**: `background`, `foreground`, `card`, `primary`, `primary-foreground`, `secondary`, `muted`, `muted-foreground`, `accent`, `destructive`, `border`, `input`, `ring`
+**ongil brand**: `surface`, `surface-2`, `line`, `brand-link`, `danger`, `danger-bg`, `caution`, `caution-bg`, `status-active-bg`, `status-done-bg`, `meal-morning/noon/night`, `med-blue/purple/orange` + `-bg` variants
+**Blue scale**: `blue-50/100/600/700/800/900`
+**Ink scale**: `ink-50/100/200/300/400/500/700/900`
+**Elevation**: `shadow-card`, `shadow-raised`, `shadow-fab` (brand-tinted, never replace with Tailwind defaults)
+**Radius**: `radius-sm`(8px) `radius-md`(10px) `radius-lg`(12px) `radius-xl`(16px) `radius-2xl`(20px) `radius-3xl`(22px)
+**Typography**: `text-2xs`(11px) `text-xs`(12px) `text-sm`(13px) `text-base`(15px) `text-lg`(17px) `text-xl`(19px/-0.01em) `text-2xl`(23px/-0.02em) `text-3xl`(26px) `text-4xl`(30px)

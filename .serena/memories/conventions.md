@@ -1,94 +1,48 @@
-# Code Conventions
+# Conventions
 
 ## Language Rules
 
-- **Comments**: Korean
-- **Variable/function names**: English (camelCase)
-- **Component names**: PascalCase
-- **File names**: kebab-case (`medication-card.tsx`) or PascalCase (standalone component files)
-- No `any` types — specify exact types
-- No magic numbers/strings → extract as constants (`const` at top of file)
-- Single responsibility principle per function
+- No `any` types — always specify exact types
+- No magic numbers/strings → extract as constants
+- No manual `useMemo`/`useCallback` — React Compiler handles optimization
+- Functions: Single Responsibility Principle
+- Always include error handling (try/catch with typed errors)
+- No hardcoded secrets or API keys — use environment variables
+- No `localStorage` for auth tokens — use HttpOnly cookies
 
-## Format Rules (.prettierrc)
+## Server / Client Component Decision
 
-- `singleQuote: true`, `semi: true`, `tabWidth: 2`, `printWidth: 100`
-- `trailingComma: "all"`, `arrowParens: "always"`, `endOfLine: "lf"`
-- Auto-sort imports: `prettier-plugin-organize-imports`
-- Auto-sort Tailwind classes: `prettier-plugin-tailwindcss`
+Default: React Server Component (RSC).
+Add `'use client'` only when component needs:
 
-## React Composition Patterns
+- Browser APIs (window, document, navigator)
+- Event handlers (onClick, onChange, etc.)
+- React hooks (useState, useEffect, useRef, etc.)
 
-Compound components · no boolean props · Context interface · Provider state lifting · React 19 API →
-full rules and code examples: `mem:react_patterns`
+## Naming
 
-## Server vs Client Component Decision Criteria
+- Variables/functions: English
+- Code comments: Korean
+- File naming: kebab-case for routes, PascalCase for components
 
-```
-Server Component (default) ← start here unless there's a reason not to
-  ├── data fetching (direct async/await)
-  ├── direct DB/API access
-  └── sensitive data handling
+## Color Usage (Design System)
 
-'use client' only when needed
-  ├── useState / useReducer
-  ├── useEffect / browser APIs
-  ├── onClick / onChange event handlers
-  └── third-party client-only libraries
-```
+- Primary blue (`--color-primary`) ≤ 10% of any screen — rarity gives authority
+- No pure black (#000) or pure white (#FFF) — use ink/surface tokens
+- No side-stripe borders — use tonal backgrounds instead
+- OKLCH for all color definitions
 
-- Place `'use client'` boundary as far down the tree as possible (leaf nodes) — avoid hoisting to top
+## Component Patterns
 
-## Component File Order
+- Standard buttons: `h-9`, `rounded-md` (10px). CTA buttons: `h-14`, `w-full`, `rounded-2xl` (20px), `shadow-fab` — 화면당 최대 1개
+- Inputs: use `.input-standard` class
+- Typography weights: only `[400+600]` or `[400+700]` combinations
+- Max 1 Display heading per page
 
-```tsx
-'use client'          // only when needed
+## Accessibility
 
-import ...            // auto-sorted by Prettier
+- WCAG AA (mobile-first)
+- `prefers-reduced-motion` supported (already in globals.css)
+- `viewport-fit: cover` for notch/home indicator
 
-// types/interfaces
-interface Props { ... }
-
-// constants
-const MAX_ITEMS = 10;
-
-// component body
-export default function ComponentName({ ... }: Props) { ... }
-```
-
-## CSS / Tailwind v4
-
-- `@import "tailwindcss"` in `globals.css`
-- CSS variable naming: `--{category}-{variant}` (e.g. `--color-primary`, `--font-geist-sans`)
-- Theme customization in `@theme inline { ... }` block
-- Do NOT create `tailwind.config.js` (conflicts with v4)
-
-## Mobile-First UI Patterns (Ongil app)
-
-- Base layout: `max-w-[390px]` (iPhone 14 baseline) centered
-- Minimum touch target: `min-h-[44px]` (iOS HIG standard)
-- Bottom sheet: `fixed bottom-0` + `translate-y` animation pattern
-- Safe area: `pb-[env(safe-area-inset-bottom)]` (notch support)
-
-## Path Imports
-
-- Use `@/` prefix (e.g. `@/components/MedicationCard`)
-- Avoid relative paths (`../`) — except within the same directory
-
-## Security
-
-- No hardcoded secrets/API keys → `.env.local`
-- No auth tokens in `localStorage` → HttpOnly cookies
-- Validate inputs server-side
-
-## Domain Terms (English consistency)
-
-| Korean      | English                  |
-| ----------- | ------------------------ |
-| 약물        | `drug` / `medication`    |
-| 복약        | `take` / `dose`          |
-| 처방전      | `prescription`           |
-| 알림        | `notification`           |
-| 보호자      | `guardian` / `caregiver` |
-| 복용 시간대 | `scheduleTime`           |
-| 약물 이력   | `medicationHistory`      |
+Stack & tokens → `mem:tech_stack`

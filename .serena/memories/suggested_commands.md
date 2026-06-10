@@ -1,55 +1,31 @@
-# Key Commands (Windows PowerShell)
+# Suggested Commands
 
-## Development
-
-```powershell
-pnpm dev            # start dev server (default port 3000)
-pnpm build          # production build
-pnpm start          # start production server (after build)
-```
-
-## Code Quality (run in order after completing work)
+## Project Scripts (pnpm)
 
 ```powershell
-pnpm type-check     # check TypeScript errors (tsc --noEmit)
-pnpm lint           # check ESLint violations
-pnpm format:check   # check Prettier format mismatches
-pnpm format         # auto-fix Prettier format (--write)
+pnpm dev            # Next.js dev server
+pnpm build          # Production build
+pnpm start          # Start production server
+pnpm lint           # ESLint
+pnpm type-check     # tsc --noEmit
+pnpm format         # Prettier auto-fix
+pnpm format:check   # Prettier check only
 ```
 
-## Package Management (pnpm only — no npm/yarn)
+## Windows / PowerShell Notes
+
+- Shell: PowerShell 5.1 on Windows 11
+- No `&&` pipeline chaining — use `;` or `if ($?) { ... }`
+- Path separator: `\` (use quotes for paths with spaces)
+- No `touch` — use `New-Item -ItemType File`
+- No `which` — use `(Get-Command name).Source`
+
+## Git
 
 ```powershell
-pnpm install                # install dependencies
-pnpm add <pkg>              # add runtime package
-pnpm add -D <pkg>           # add devDependency
-pnpm remove <pkg>           # remove package
-pnpm why <pkg>              # show dependency path
+git status
+git log --oneline -10
 ```
 
-## Git (pre-commit hook runs automatically)
-
-```powershell
-git add <files>
-git commit -m "feat: add medication alert component"
-```
-
-- `git commit` triggers lint-staged:
-  - `*.{ts,tsx,js,jsx}` → `eslint --fix` → `prettier --write`
-  - `*.{css,json,md}` → `prettier --write`
-- Commit messages: Korean, single purpose
-- Format: `feat:` `fix:` `refactor:` `style:` `chore:` `docs:` `test:`
-
-## Debugging TypeScript Errors
-
-```powershell
-pnpm type-check 2>&1 | Select-String "error"   # filter errors only
-```
-
-## Windows Specifics
-
-- Path separator: `\` (PowerShell), Next.js internals use `/`
-- Line endings: LF enforced (`.prettierrc` `endOfLine: "lf"`)
-- Env vars: `$env:NEXT_PUBLIC_API_URL` format
-- Stop dev server: `Ctrl+C`
-- `.env.local` is git-ignored — must be created manually
+Commit convention: Korean message, one purpose per commit.
+Prefixes: `feat / fix / refactor / style / chore / docs / test`

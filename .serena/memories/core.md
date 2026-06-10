@@ -1,51 +1,45 @@
-# Ongil(piuda) Frontend — Project Core
+# Core
 
-## Project Identity
+Korean medication management app "Ongil(온길)" — adult-child caregiver → elderly parent.
 
-- Next.js frontend for Korean medication management app "Ongil(piuda)"
-- Primary user: caregiver managing elderly parents' medication
-- Core features: Korean drug API lookup, medication schedule, OCR prescription recognition, phone alerts
-- Platform: mobile-first web app
-
-## Current Source Map (as of 2026-05)
+## Source Map
 
 ```
-src/
-└── app/
-    ├── layout.tsx   ← RootLayout, Geist fonts, lang="en" (⚠️ not yet changed to "ko")
-    ├── page.tsx     ← Home page (⚠️ Create Next App boilerplate not yet cleaned up)
-    ├── globals.css  ← Tailwind v4 @import + @theme inline CSS variables
-    └── favicon.ico
+src/app/
+  layout.tsx      # Root layout: Pretendard font, lang="ko", metadata
+  page.tsx        # Home screen (Server Component)
+  globals.css     # Tailwind v4 @theme tokens + @layer base/components
+src/components/
+  ui/             # shadcn/ui 원본 (수정 금지, 래핑만 할 것)
+    button.tsx    # cta 사이즈 variant 포함
+    card.tsx
+    dialog.tsx
+    drawer.tsx
+    sheet.tsx
+    sonner.tsx
+  ongil/          # ongil 커스텀 합성 컴포넌트 (아직 미생성)
+src/lib/
+  utils.ts        # cn() = clsx + tailwind-merge
+next.config.ts    # Next.js config: reactCompiler=true
+package.json      # name="piuda", scripts, deps
+components.json   # shadcn/ui 설정 (style: new-york, rsc: true)
 ```
 
-## Planned Directories (not yet created — create when implementing features)
+## Project-Wide Invariants
 
-| Path              | Role                                                  |
-| ----------------- | ----------------------------------------------------- |
-| `src/components/` | Shared UI components (feature-based or Atomic Design) |
-| `src/lib/`        | Utility / helper functions                            |
-| `src/hooks/`      | Custom React hooks                                    |
-| `src/types/`      | Shared TypeScript types                               |
-| `src/api/`        | API client layer (Korean drug API)                    |
+- Mobile-first, 390px max-width
+- Korean-only, single language
+- All pages RSC by default — `'use client'` only for browser APIs / event handlers
+- Design tokens live in `globals.css @theme` — NOT in tailwind.config.js (doesn't exist)
+- React Compiler enabled → NO manual useMemo/useCallback
 
-## Project Invariants
+## Domain Vocabulary
 
-- `@/` path alias → `./src/*` (tsconfig paths)
-- Font variables: `--font-geist-sans`, `--font-geist-mono`
-- CSS variables: `--background`, `--foreground` (automatic dark mode)
-- React Compiler enabled → no manual `memo`/`useMemo`/`useCallback`
-- HTML lang must be `"ko"` (not yet fixed in layout.tsx)
+- 온길(Ongil) = brand name
+- 보호자(caregiver) = adult-child primary user
+- 부모님(parent) = secondary user (receives phone call only)
+- 약(medication) / 복약(adherence) / 복약 스케줄(medication schedule)
 
-## Outstanding Issues (initial boilerplate)
-
-- [ ] `src/app/layout.tsx` `lang="en"` → `lang="ko"`
-- [ ] `src/app/layout.tsx` metadata.title / description → update for Ongil app
-- [ ] `src/app/page.tsx` Replace Create Next App boilerplate with actual home UI
-
-## Memory Reference Structure
-
-- Version · stack · Tailwind v4 · React Compiler caveats → `mem:tech_stack`
-- Language rules · format · file structure · Server/Client criteria · domain terms → `mem:conventions`
-- Compound component · no boolean props · Context interface · React 19 API → `mem:react_patterns`
-- pnpm / ESLint / Prettier / git commands → `mem:suggested_commands`
-- Task completion checklist · new file validation → `mem:task_completion`
+Language rules · domain terms · Server/Client criteria → `mem:conventions`
+Stack details → `mem:tech_stack`
+Commands → `mem:suggested_commands`
