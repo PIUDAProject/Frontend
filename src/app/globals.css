@@ -66,6 +66,7 @@
   --status-active-bg: var(--blue-50);
   --status-done: oklch(52% 0.14 155);
   --status-done-bg: oklch(97% 0.025 155);
+  --status-done-bright: oklch(79% 0.19 151);
 
   /* Meal-time */
   --meal-morning: var(--blue-600);
@@ -79,6 +80,12 @@
   --med-purple: oklch(52% 0.18 290);
   --med-orange-bg: oklch(95% 0.04 50);
   --med-orange: oklch(58% 0.18 50);
+
+  /* 홈 복약 현황 카드 — 의도된 다크 배경 변형 (DESIGN.md § Current Status Card 참고) */
+  --card-current: var(--blue-800);
+  --card-current-text: var(--ink-50);
+  --card-current-text-muted: var(--ink-300);
+  --card-current-track: oklch(100% 0 0 / 20%);
 }
 
 /* ─── 2. @theme inline (Primitive → Tailwind 유틸리티) ──────────── */
@@ -117,6 +124,7 @@
   --color-status-active-bg: var(--status-active-bg);
   --color-status-done: var(--status-done);
   --color-status-done-bg: var(--status-done-bg);
+  --color-status-done-bright: var(--status-done-bright);
   --color-meal-morning: var(--meal-morning);
   --color-meal-noon: var(--meal-noon);
   --color-meal-night: var(--meal-night);
@@ -126,6 +134,12 @@
   --color-med-purple: var(--med-purple);
   --color-med-orange-bg: var(--med-orange-bg);
   --color-med-orange: var(--med-orange);
+
+  /* 홈 복약 현황 카드 */
+  --color-card-current: var(--card-current);
+  --color-card-current-text: var(--card-current-text);
+  --color-card-current-text-muted: var(--card-current-text-muted);
+  --color-card-current-track: var(--card-current-track);
 
   /* Blue scale (명시적 사용분) */
   --color-blue-50: var(--blue-50);
