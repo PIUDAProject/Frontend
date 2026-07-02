@@ -73,4 +73,7 @@ meeting-outputs
 .gstack
 
 #serena
-data
+./serena/data
+
+#루트 data 폴더만 무시 (src/lib/data 등 하위 경로는 제외)
+/data
