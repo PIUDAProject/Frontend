@@ -50,7 +50,7 @@ export function MealTimeForm() {
 
   function handleSkip() {
     start(async () => {
-      router.push('/');
+      router.push('/onboarding/send-card');
     });
   }
 
@@ -60,7 +60,7 @@ export function MealTimeForm() {
     start(async () => {
       try {
         await saveMealTimes(meals);
-        router.push('/');
+        router.push('/onboarding/send-card');
       } catch (err: unknown) {
         const message =
           err instanceof Error ? err.message : '저장 중 오류가 발생했습니다. 다시 시도해주세요.';

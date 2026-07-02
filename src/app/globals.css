@@ -260,6 +260,15 @@
   overflow-wrap: anywhere;
 }
 
+/* ─── vCard 아바타 그라데이션 @utility ──────────────────────────── */
+@utility vc-avatar {
+  background-image: radial-gradient(
+    circle at 30% 30%,
+    color-mix(in oklch, var(--primary) 60%, transparent),
+    color-mix(in oklch, var(--primary) 30%, var(--blue-800)) 100%
+  );
+}
+
 /* ─── 온보딩 배경 그라데이션 @utility ───────────────────────────── */
 @utility ob-bg {
   background-image:
