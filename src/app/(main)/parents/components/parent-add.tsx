@@ -31,6 +31,7 @@ export default function ParentAdd({ parents }: ParentAddProps) {
         <li className="flex justify-center">
           <Link
             href="/parents/add"
+            aria-label="부모님 추가"
             className="focus-visible:ring-primary flex flex-col items-center justify-center gap-4 rounded-xl transition-opacity duration-150 outline-none hover:opacity-80 focus-visible:ring-1 focus-visible:ring-offset-2"
           >
             <div className="bg-muted flex h-25 w-25 items-center justify-center rounded-full border border-dashed">

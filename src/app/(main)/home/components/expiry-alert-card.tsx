@@ -11,7 +11,6 @@ export default function ExpiryAlertCard({
   daysLeft,
   totalDays,
 }: ExpiryAlertCardProps) {
-  // 잔여일이 0 이하인 경우에도 카드가 표시되도록 하고, 진행률은 100%로 고정
   const consumedPercent = Math.min(((totalDays - daysLeft) / totalDays) * 100, 100);
 
   return (
@@ -25,20 +24,25 @@ export default function ExpiryAlertCard({
       </div>
 
       <div className="flex items-center justify-between">
-        <span className="kr-wrap text-ink-900 min-w-0 flex-1 pr-2 text-base">{medicationName}</span>
+        <span className="kr-wrap text-foreground min-w-0 flex-1 pr-2 text-base">
+          {medicationName}
+        </span>
         <span className="text-danger shrink-0 text-base font-medium">{daysLeft}일 남음</span>
       </div>
 
       <div
         className="bg-danger/15 h-1.5 w-full overflow-hidden rounded-full"
         role="progressbar"
-        aria-valuenow={daysLeft}
+        aria-valuenow={totalDays - daysLeft}
         aria-valuemin={0}
         aria-valuemax={totalDays}
         aria-label={`${medicationName} 잔여일`}
         aria-valuetext={`${daysLeft}일 남음 (전체 ${totalDays}일 중)`}
       >
-        <div className="bg-danger h-full rounded-full" style={{ width: `${consumedPercent}%` }} />
+        <div
+          className="bg-danger h-full w-full origin-left rounded-full transition-transform duration-500 ease-out"
+          style={{ transform: `scaleX(${consumedPercent / 100})` }}
+        />
       </div>
     </article>
   );
