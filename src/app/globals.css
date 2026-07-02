@@ -90,6 +90,10 @@
   --social-naver: oklch(0.725 0.2014 149.53);
   --social-naver-text: oklch(100% 0 0);
 
+  /* 레이아웃 치수 — 고정 헤더/네비 높이 (safe-area 포함) */
+  --header-height: calc(4.5rem + env(safe-area-inset-top));
+  --nav-height: calc(4rem + max(0rem, env(safe-area-inset-bottom)));
+
   /* 홈 복약 현황 카드 — 의도된 다크 배경 변형 (DESIGN.md § Current Status Card 참고) */
   --card-current: var(--blue-800);
   --card-current-text: var(--ink-50);
