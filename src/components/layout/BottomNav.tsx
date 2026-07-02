@@ -21,14 +21,17 @@ const NAV_ITEMS = [
   { key: 'my', label: '마이페이지', href: '/my', icon: User },
 ] as const satisfies readonly NavItem[];
 
-export function BottomNav() {
+export function BottomNav({ className }: { className?: string }) {
   const pathname = usePathname();
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
     <nav
       aria-label="주요 메뉴"
-      className="bottom-nav border-line bg-card flex items-end justify-evenly border-t px-1.5 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))]"
+      className={cn(
+        'bottom-nav border-line bg-card flex items-end justify-evenly border-t px-1.5 pt-2.5 pb-[max(0.75rem,env(safe-area-inset-bottom))]',
+        className,
+      )}
     >
       {NAV_ITEMS.map(({ key, label, href, icon: Icon, variant }: NavItem) => {
         const active = isActive(href);

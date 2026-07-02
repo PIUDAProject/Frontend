@@ -7,16 +7,14 @@ import { useRef, useState } from 'react';
 const KO_DAY = ['일', '월', '화', '수', '목', '금', '토'] as const;
 
 type WeekDay = {
-  iso: string; // "2026-06-12"
-  dayName: string; // "수"
-  date: number; // 12
+  iso: string;
+  dayName: string;
+  date: number;
   isToday: boolean;
 };
 
-/** anchorISO가 속한 주(일요일 시작)의 7일을 만든다. 순수 함수 — 테스트 용이. */
 function buildWeek(anchorISO: string): WeekDay[] {
   const anchor = dayjs(anchorISO);
-  // startOf('week')는 dayjs 기본값으로 일요일 기준.
   const sunday = anchor.startOf('week');
 
   return Array.from({ length: 7 }, (_, i) => {
@@ -32,13 +30,9 @@ function buildWeek(anchorISO: string): WeekDay[] {
 }
 
 type WeekStripProps = {
-  /** 오늘 날짜(yyyy-MM-dd). 서버에서 계산해 전달. */
   anchorISO: string;
-  /** 복약 일정이 있는 날짜(yyyy-MM-dd) — 점 표시. */
   markedISO?: readonly string[];
-  /** 제어 모드: 선택된 날짜. 미지정 시 내부 상태(기본=오늘). */
   selectedISO?: string;
-  /** 날짜 선택 콜백. */
   onSelectDate?: (iso: string) => void;
   className?: string;
 };
@@ -53,11 +47,9 @@ export function WeekStrip({
   const week = buildWeek(anchorISO);
   const marked = new Set(markedISO ?? []);
 
-  // 비제어 모드 기본 선택 = 오늘.
   const [internal, setInternal] = useState(anchorISO);
   const selected = selectedISO ?? internal;
 
-  // 화살표 키 포커스 이동을 위한 버튼 ref 배열 (roving tabindex 패턴).
   const buttonRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const handleSelect = (iso: string) => {
@@ -104,7 +96,7 @@ export function WeekStrip({
               isSelected
                 ? 'border-primary bg-primary shadow-fab focus-visible:ring-offset-primary focus-visible:ring-white/70'
                 : cn(
-                    'focus-visible:ring-ring/60',
+                    'focus-visible:ring-primary',
                     'border-line bg-card hover:border-primary hover:bg-accent',
                     day.isToday && 'ring-primary/40 ring-1 ring-inset',
                   ),
@@ -131,7 +123,6 @@ export function WeekStrip({
             >
               {day.date}
             </time>
-            {/* 복약 일정 점 — 자리 차지용으로 항상 렌더 */}
             <span
               aria-hidden
               className={cn(

@@ -1,19 +1,9 @@
+import type { CurrentCardData } from '@/lib/data/types';
 import { cn } from '@/lib/utils';
 
 type MedicationStatus = 'pending' | 'partial' | 'done' | 'empty';
 
-type NextMedication = {
-  time: string;
-  name: string;
-  extraCount: number;
-};
-
-export type HomeCurrentCardProps = {
-  patientName: string;
-  total: number;
-  completed: number;
-  nextMedication?: NextMedication;
-};
+export type HomeCurrentCardProps = Omit<CurrentCardData, 'id'>;
 
 function deriveStatus(total: number, completed: number): MedicationStatus {
   if (total === 0) return 'empty';
@@ -28,7 +18,7 @@ function getStatusSuffix(status: Exclude<MedicationStatus, 'empty'>, completed: 
   return `건 예정 · ${completed}건 완료`;
 }
 
-function formatNextMedName(med: NextMedication): string {
+function formatNextMedName(med: NonNullable<HomeCurrentCardProps['nextMedication']>): string {
   if (med.extraCount > 0) return `${med.name} 외 ${med.extraCount}건`;
   return med.name;
 }
@@ -71,10 +61,10 @@ export default function HomeCurrentCard({
           >
             <div
               className={cn(
-                'h-full rounded-full transition-[width] duration-500 ease-[cubic-bezier(0.25,0,0,1)]',
+                'h-full w-full origin-left transition-transform duration-500 ease-[cubic-bezier(0.25,0,0,1)]',
                 status === 'done' ? 'bg-status-done-bright' : 'bg-white',
               )}
-              style={{ width: `${progressPercent}%` }}
+              style={{ transform: `scaleX(${progressPercent / 100})` }}
             />
           </div>
         </>
