@@ -1,5 +1,6 @@
 'use client';
 
+import { useMedicationSheetStore } from '@/lib/stores/medication-sheet-store';
 import { cn } from '@/lib/utils';
 import { BriefcaseMedical, House, Plus, ShieldCheck, User, type LucideIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -23,6 +24,7 @@ const NAV_ITEMS = [
 
 export function BottomNav({ className }: { className?: string }) {
   const pathname = usePathname();
+  const openSheet = useMedicationSheetStore((s) => s.open);
   const isActive = (href: string) => pathname === href || pathname.startsWith(`${href}/`);
 
   return (
@@ -38,11 +40,14 @@ export function BottomNav({ className }: { className?: string }) {
 
         if (variant === 'disc') {
           return (
-            <Link
+            <button
               key={key}
-              href={href}
+              type="button"
               aria-label={label}
-              aria-current={active ? 'page' : undefined}
+              onClick={(e) => {
+                (e.currentTarget as HTMLButtonElement).blur();
+                openSheet();
+              }}
               className="group flex min-w-14 flex-col items-center gap-1.5 rounded-md focus-visible:outline-none"
             >
               <div className="bg-primary shadow-fab group-focus-visible:ring-primary grid size-11 place-items-center rounded-full group-focus-visible:ring-2 group-focus-visible:ring-offset-1">
@@ -56,7 +61,7 @@ export function BottomNav({ className }: { className?: string }) {
               <span aria-hidden={true} className="text-primary text-2xs font-bold">
                 {label}
               </span>
-            </Link>
+            </button>
           );
         }
 
