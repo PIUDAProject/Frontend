@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import dayjs from 'dayjs';
 import { CalendarDays, ChevronLeft, ChevronRight, Info } from 'lucide-react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
 
 const PRESETS = ['1주', '1개월', '3개월', '1년'] as const;
 type PresetLabel = (typeof PRESETS)[number];
@@ -120,7 +120,7 @@ function MiniCalendar({ value, onChange }: MiniCalendarProps) {
 
 /* ─── 날짜 선택 페이지 ──────────────────────────────────────── */
 
-export default function DateFilterPage() {
+function DateFilterContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -274,5 +274,13 @@ export default function DateFilterPage() {
         </Button>
       </div>
     </div>
+  );
+}
+
+export default function DateFilterPage() {
+  return (
+    <Suspense>
+      <DateFilterContent />
+    </Suspense>
   );
 }

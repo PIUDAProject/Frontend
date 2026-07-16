@@ -2,13 +2,13 @@
 
 import { searchMedications } from '@/lib/data/note';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useDeferredValue, useState } from 'react';
+import { Suspense, useDeferredValue, useState } from 'react';
 import { DateFilterBadge } from './components/date-filter-badge';
 import { RecentSearches, useRecentSearches } from './components/recent-searches';
 import { SearchInput } from './components/search-input';
 import { SearchResults } from './components/search-results';
 
-export default function NoteSearchPage() {
+function NoteSearchContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -67,5 +67,13 @@ export default function NoteSearchPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function NoteSearchPage() {
+  return (
+    <Suspense>
+      <NoteSearchContent />
+    </Suspense>
   );
 }
