@@ -1,7 +1,5 @@
 'use client';
 
-'use client';
-
 import { searchMedications } from '@/lib/data/note';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useDeferredValue, useState } from 'react';
