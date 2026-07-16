@@ -44,3 +44,42 @@ export type ExpiryAlertData = {
   daysLeft: number;
   totalDays: number;
 };
+
+// 약물노트 타입
+export type NoteStatus = 'active' | 'completed' | 'stopped';
+
+export type NoteMedication = {
+  id: string;
+  name: string;
+  kind: string;
+  dosageInfo: string[];
+  status: NoteStatus;
+  color: MedColor;
+};
+
+export type NoteHospitalGroup = {
+  id: string;
+  hospitalName?: string;
+  medications: NoteMedication[];
+  showReregistration: boolean;
+};
+
+export type NotePrescription = {
+  id: string;
+  prescriptionDate: string;
+  hospitals: NoteHospitalGroup[];
+};
+
+export type NoteMedicationDetail = {
+  id: string;
+  name: string;
+  kind: string;
+  color: MedColor;
+  imageUrl?: string;
+  tabs: {
+    efficacy: string;
+    dosage: string;
+    caution: string;
+    sideEffect: string;
+  };
+};
