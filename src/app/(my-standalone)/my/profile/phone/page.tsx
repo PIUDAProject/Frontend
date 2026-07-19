@@ -4,7 +4,7 @@ import { PhoneEditForm } from './_components/phone-edit-form';
 
 export default function PhonePage() {
   return (
-    <main className="bg-surface-2 mx-auto flex min-h-svh max-w-[390px] flex-col">
+    <>
       {/* 헤더 */}
       <header
         className="border-line bg-surface-2 flex items-center border-b px-4.5"
@@ -31,6 +31,6 @@ export default function PhonePage() {
       </div>
 
       <PhoneEditForm />
-    </main>
+    </>
   );
 }

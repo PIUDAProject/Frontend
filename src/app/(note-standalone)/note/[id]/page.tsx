@@ -15,7 +15,7 @@ export default async function MedicationDetailPage({ params }: { params: Params 
   if (!detail) notFound();
 
   return (
-    <div className="bg-surface flex min-h-dvh flex-col">
+    <>
       {/* 헤더 */}
       <header className="z-sticky border-line bg-surface-2 sticky top-0 border-b px-2 pt-[env(safe-area-inset-top)]">
         <div className="flex h-14 items-center gap-3">
@@ -43,6 +43,6 @@ export default async function MedicationDetailPage({ params }: { params: Params 
 
       {/* 하단 CTA */}
       <MedAddCta medicationName={detail.name} />
-    </div>
+    </>
   );
 }

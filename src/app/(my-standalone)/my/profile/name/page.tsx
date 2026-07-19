@@ -6,7 +6,7 @@ const MOCK_NAME = '김지수';
 
 export default function NameEditPage() {
   return (
-    <main className="bg-surface-2 mx-auto flex min-h-svh max-w-[390px] flex-col">
+    <>
       <header
         className="border-line bg-surface-2 flex items-center border-b px-4.5"
         style={{ paddingTop: 'calc(1rem + env(safe-area-inset-top))', paddingBottom: '0.75rem' }}
@@ -23,6 +23,6 @@ export default function NameEditPage() {
       </header>
 
       <NameEditForm initialName={MOCK_NAME} />
-    </main>
+    </>
   );
 }

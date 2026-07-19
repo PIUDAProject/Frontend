@@ -168,7 +168,7 @@ function DateFilterContent() {
   }
 
   return (
-    <div className="bg-surface flex min-h-dvh flex-col">
+    <>
       {/* 헤더 */}
       <header className="border-line bg-surface-2 flex items-center border-b px-4 pt-[calc(1rem+env(safe-area-inset-top))] pb-3">
         <button
@@ -273,7 +273,7 @@ function DateFilterContent() {
           조회
         </Button>
       </div>
-    </div>
+    </>
   );
 }
 

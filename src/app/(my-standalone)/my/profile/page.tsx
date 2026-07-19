@@ -10,7 +10,7 @@ const MOCK_PROFILE = {
 
 export default function ProfilePage() {
   return (
-    <main className="bg-surface-2 mx-auto min-h-svh max-w-[390px]">
+    <>
       {/* 헤더 */}
       <header
         className="border-line bg-surface-2 flex items-center border-b px-4.5"
@@ -104,7 +104,7 @@ export default function ProfilePage() {
           계정 탈퇴
         </Link>
       </div>
-    </main>
+    </>
   );
 }
 

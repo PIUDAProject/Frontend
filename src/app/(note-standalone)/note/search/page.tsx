@@ -40,7 +40,7 @@ function NoteSearchContent() {
   }
 
   return (
-    <div className="bg-surface flex min-h-dvh flex-col">
+    <>
       <h1 className="sr-only">약물 검색</h1>
       <SearchInput value={query} onSearch={setQuery} onSubmit={handleSearchSubmit} />
 
@@ -66,7 +66,7 @@ function NoteSearchContent() {
           />
         )}
       </div>
-    </div>
+    </>
   );
 }
 
