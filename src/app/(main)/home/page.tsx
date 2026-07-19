@@ -1,5 +1,6 @@
 import { getTodayISO } from '@/lib/date';
 import { Suspense } from 'react';
+import { ChatFloatingButton } from './components/chat-floating-button';
 import { CurrentCardSection } from './components/current-card-section';
 import { ExpiryAlertSection } from './components/expiry-alert-section';
 import { MediCardSection } from './components/medi-card-section';
@@ -24,25 +25,30 @@ export default async function HomePage({ searchParams }: { searchParams: SearchP
   return (
     <>
       <h1 className="sr-only">홈</h1>
-      <Suspense fallback={<WeekStripSkeleton />}>
-        <WeekStripSection
-          anchorISO={todayISO}
-          selectedISO={selectedISO}
-          patientId={TEMP_PATIENT_ID}
-        />
-      </Suspense>
+      {/* 챗봇 플로팅 버튼 높이만큼 여백을 둬 마지막 카드가 가려지지 않게 함 */}
+      <div className="pb-14">
+        <Suspense fallback={<WeekStripSkeleton />}>
+          <WeekStripSection
+            anchorISO={todayISO}
+            selectedISO={selectedISO}
+            patientId={TEMP_PATIENT_ID}
+          />
+        </Suspense>
 
-      <Suspense fallback={<CurrentCardSkeleton />}>
-        <CurrentCardSection patientId={TEMP_PATIENT_ID} date={selectedISO} />
-      </Suspense>
+        <Suspense fallback={<CurrentCardSkeleton />}>
+          <CurrentCardSection patientId={TEMP_PATIENT_ID} date={selectedISO} />
+        </Suspense>
 
-      <Suspense fallback={<AlertSkeleton />}>
-        <ExpiryAlertSection patientId={TEMP_PATIENT_ID} />
-      </Suspense>
+        <Suspense fallback={<AlertSkeleton />}>
+          <ExpiryAlertSection patientId={TEMP_PATIENT_ID} />
+        </Suspense>
 
-      <Suspense fallback={<MediCardSkeleton />}>
-        <MediCardSection patientId={TEMP_PATIENT_ID} date={selectedISO} />
-      </Suspense>
+        <Suspense fallback={<MediCardSkeleton />}>
+          <MediCardSection patientId={TEMP_PATIENT_ID} date={selectedISO} />
+        </Suspense>
+      </div>
+
+      <ChatFloatingButton />
     </>
   );
 }

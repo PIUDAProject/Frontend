@@ -141,3 +141,64 @@ export type ReportSummary = {
   hospitals: ReportHospitalGroup[];
   interactions: DrugInteractionPair[];
 };
+
+// 챗봇 타입
+export type ChatRole = 'user' | 'assistant';
+
+// 첫 화면 진입 시 제시하는 제안 프롬프트 (빈 채팅창 금지)
+export type ChatSuggestion = {
+  id: string;
+  label: string;
+  prompt: string;
+};
+
+export type ChatQuickReply = {
+  id: string;
+  label: string; // QUICK_REPLY_LABEL_MAX_LENGTH 이하
+};
+
+export type ChatDrugCardAction = {
+  id: string;
+  label: string;
+  href: string; // 기존 라우트(약물노트 상세, 약 등록 플로우 등)로 이동, 대화 내에서 처리하지 않음
+};
+
+export type ChatDrugCard = {
+  id: string;
+  name: string;
+  kind: string;
+  color: MedColor;
+  dosageInfo: string[];
+  caution?: string;
+  actions: ChatDrugCardAction[]; // DRUG_CARD_ACTION_MAX_COUNT 이하
+};
+
+// 에러 응답 3단계 폴백: 1) 재표현 요청 2) quick-reply 안내 3) 핵심 액션/처음으로 안내
+export type ChatErrorFallbackStage = 1 | 2 | 3;
+
+export type ChatErrorFallback = {
+  stage: ChatErrorFallbackStage;
+  text: string;
+  quickReplies?: ChatQuickReply[];
+};
+
+export type ChatMessageContent =
+  | { type: 'text'; text: string }
+  | { type: 'drugCards'; cards: ChatDrugCard[]; moreCount?: number }
+  | { type: 'quickReplies'; text: string; replies: ChatQuickReply[] }
+  | { type: 'errorFallback'; fallback: ChatErrorFallback };
+
+export type ChatMessage = {
+  id: string;
+  role: ChatRole;
+  content: ChatMessageContent;
+  timestamp: string; // 'HH:mm'
+};
+
+export type ChatScenarioId = 'registered-drugs' | 'side-effects' | 'symptom-recommendation';
+
+// 어시스턴트 응답 요청 입력: 사용자 텍스트 입력 또는 quick-reply 선택
+// API 연동 시에도 이 형태가 실제 요청 payload의 기반이 된다
+export type ChatReplyInput =
+  | { kind: 'userText'; text: string; fallbackStage: ChatErrorFallbackStage }
+  | { kind: 'quickReply'; replyId: string };
