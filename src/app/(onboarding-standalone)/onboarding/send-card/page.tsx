@@ -19,14 +19,11 @@ export default async function SendCardPage() {
   };
 
   return (
-    <main
-      aria-label="연락처 카드 발송"
-      className="bg-surface-2 mx-auto flex min-h-svh w-full max-w-[390px] flex-col"
-    >
+    <div className="flex flex-1 flex-col">
       <CallCareBar />
       <Suspense fallback={<div className="flex-1" aria-busy="true" aria-label="로딩 중" />}>
         <SendCardFlow card={card} />
       </Suspense>
-    </main>
+    </div>
   );
 }
