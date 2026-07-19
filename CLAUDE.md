@@ -40,18 +40,43 @@ Pre-commit hook runs ESLint + Prettier automatically via husky + lint-staged.
 ```
 src/
   app/
-    layout.tsx          # Root layout: Pretendard Variable font, lang="ko", PWA meta
-    page.tsx            # Home screen
-    globals.css         # Design token definitions (see below)
-    [route]/
-      page.tsx          # Route entry (Server Component)
-      components/       # Route-local components
+    layout.tsx                    # Root layout: Pretendard Variable font, lang="ko", PWA meta
+    page.tsx                      # Root entry (redirects into the app)
+    globals.css                   # Design token definitions (see below)
+    (main)/                       # Bottom-nav + header shell: home, parents
+    (my-shell)/ (note-shell)/ (report-shell)/
+                                   # Sub-shell layouts: back button + bottom nav, no header
+    (my-standalone)/ (note-standalone)/ (parents-standalone)/
+    (chat-standalone)/ (medication-standalone)/ (onboarding-standalone)/ (report-standalone)/
+                                   # Full-screen flows: no bottom nav (detail pages, forms, wizards)
+      [route]/
+        page.tsx                 # Route entry (Server Component)
+        _components/             # Route-local components (underscore prefix opts out of routing)
+    api/report/pdf/               # Route handler: streams the @react-pdf/renderer PDF
   components/
-    ui/                 # shadcn/ui primitives (restyled via CSS tokens)
-    layout/             # App-shell components (AppHeader, etc.)
+    ui/                           # shadcn/ui primitives (restyled via CSS tokens)
+    layout/                       # App-shell components (AppHeader, BottomNav, MedicationSheet)
+    chat/ parent-form/ send-card/ # Components shared across 2+ routes
   lib/
-    utils.ts            # cn() helper (clsx + tailwind-merge)
+    actions/                      # Server Actions ('use server') — currently stubs, see below
+    data/                         # Mock data + data-shape functions consumed by pages
+    schema/                       # Zod schemas for form validation
+    stores/                       # Zustand stores (e.g. medication-sheet-store)
+    pdf/                          # @react-pdf/renderer document + color tokens for the PDF report
+    constants/                    # Shared constants (chat limits, medication color map)
+    date.ts, utils.ts             # dayjs helpers, cn() (clsx + tailwind-merge)
+  types/api.ts                    # Shared API-facing types
 ```
+
+Route groups follow a `(domain-shellType)` naming convention. The shell type controls chrome, not the URL path:
+
+- **`-shell`** — persistent bottom nav, no top app header (sub-pages of a tab, e.g. `/my`, `/note`, `/report`)
+- **`-standalone`** — no bottom nav, no header; full-bleed flow (detail/edit pages, multi-step forms, chat)
+- **`(main)`** — the only group with both `AppHeader` and `BottomNav`
+
+Route groups don't affect URL segments, so the same path prefix (e.g. `/my`) can be split across groups — check which group currently owns a segment before adding a sibling route to avoid an accidental collision.
+
+There is no backend integration yet: `lib/data/*` supplies mock data shaped like the real API contracts, and `lib/actions/*` are `'use server'` stubs (see the `TODO` comments) awaiting real persistence + `revalidatePath` calls. Types in `lib/data/types.ts` are the source of truth for these shapes until an API layer replaces them.
 
 All pages are React Server Components by default. Add `'use client'` only when the component requires browser APIs or event handlers.
 
