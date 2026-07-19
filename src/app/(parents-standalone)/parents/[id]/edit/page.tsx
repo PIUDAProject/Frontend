@@ -40,7 +40,7 @@ export default async function ParentEditPage({ params }: { params: Promise<{ id:
   const parent = MOCK_PARENTS[id] ?? MOCK_PARENTS['1'];
 
   return (
-    <main className="bg-surface-2 mx-auto min-h-svh max-w-[390px]">
+    <div className="flex flex-1 flex-col">
       {/* 헤더 */}
       <header
         className="border-line bg-surface-2 flex items-center border-b px-4.5"
@@ -77,6 +77,6 @@ export default async function ParentEditPage({ params }: { params: Promise<{ id:
       </div>
 
       <ParentEditForm initialData={parent} />
-    </main>
+    </div>
   );
 }
