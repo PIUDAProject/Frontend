@@ -1,7 +1,7 @@
 import { getChatSuggestions } from '@/lib/data/chat';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { ChatScreen } from './components/chat-screen';
+import { ChatScreen } from './_components/chat-screen';
 
 export default function ChatPage() {
   const suggestions = getChatSuggestions();

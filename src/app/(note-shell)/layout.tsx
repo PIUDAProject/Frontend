@@ -1,6 +1,6 @@
 import { BottomNav } from '@/components/layout/bottom-nav';
 import dynamic from 'next/dynamic';
-import { NoteSearchBar } from './note/components/note-search-bar';
+import { NoteSearchBar } from './note/_components/note-search-bar';
 
 const MedicationSheet = dynamic(() =>
   import('@/components/layout/medication-sheet').then((m) => m.MedicationSheet),

@@ -1,6 +1,6 @@
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { PhoneEditForm } from './components/phone-edit-form';
+import { PhoneEditForm } from './_components/phone-edit-form';
 
 export default function PhonePage() {
   return (

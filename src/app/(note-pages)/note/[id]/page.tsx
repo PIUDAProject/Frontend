@@ -2,9 +2,9 @@ import { getMedicationDetail } from '@/lib/data/note';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { MedAddCta } from './components/med-add-cta';
-import { MedDetailHero } from './components/med-detail-hero';
-import { MedDetailTabs } from './components/med-detail-tabs';
+import { MedAddCta } from './_components/med-add-cta';
+import { MedDetailHero } from './_components/med-detail-hero';
+import { MedDetailTabs } from './_components/med-detail-tabs';
 
 type Params = Promise<{ id: string }>;
 

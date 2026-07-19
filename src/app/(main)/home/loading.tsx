@@ -3,7 +3,7 @@ import {
   CurrentCardSkeleton,
   MediCardSkeleton,
   WeekStripSkeleton,
-} from './components/skeletons';
+} from './_components/skeletons';
 
 export default function HomeLoading() {
   return (

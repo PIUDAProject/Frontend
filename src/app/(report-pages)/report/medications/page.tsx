@@ -2,12 +2,12 @@ import { TEMP_PATIENT_ID } from '@/lib/data/report';
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
 import { Suspense } from 'react';
-import { ReportMedicationsHeaderCount } from './components/report-medications-header-count';
-import { ReportMedicationsList } from './components/report-medications-list';
+import { ReportMedicationsHeaderCount } from './_components/report-medications-header-count';
+import { ReportMedicationsList } from './_components/report-medications-list';
 import {
   ReportMedicationsHeaderCountSkeleton,
   ReportMedicationsListSkeleton,
-} from './components/skeletons';
+} from './_components/skeletons';
 
 export default function ReportMedicationsPage() {
   return (

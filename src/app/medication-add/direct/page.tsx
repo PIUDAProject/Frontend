@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import { MedicationDirectForm } from './components/medication-direct-form';
+import { MedicationDirectForm } from './_components/medication-direct-form';
 
 function DirectFormSkeleton() {
   return (

@@ -5,9 +5,9 @@ import { cn } from '@/lib/utils';
 import { ChevronLeft } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useDeferredValue, useState } from 'react';
-import { MedicationSearchInput } from './components/medication-search-input';
-import type { DrugItem } from './components/medication-search-results';
-import { MedicationSearchResults } from './components/medication-search-results';
+import { MedicationSearchInput } from './_components/medication-search-input';
+import type { DrugItem } from './_components/medication-search-results';
+import { MedicationSearchResults } from './_components/medication-search-results';
 
 const MOCK_DRUGS: DrugItem[] = [
   { code: 'D001', name: '타이레놀정 500mg', manufacturer: '한국얀센', category: '해열진통제' },

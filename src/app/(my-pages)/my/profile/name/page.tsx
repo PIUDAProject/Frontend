@@ -1,6 +1,6 @@
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { NameEditForm } from './components/name-edit-form';
+import { NameEditForm } from './_components/name-edit-form';
 
 const MOCK_NAME = '김지수';
 

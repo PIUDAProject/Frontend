@@ -1,6 +1,6 @@
 import { ChevronLeft } from 'lucide-react';
 import Link from 'next/link';
-import { DeleteConfirmButton } from './components/delete-confirm-button';
+import { DeleteConfirmButton } from './_components/delete-confirm-button';
 
 const NOTICES = [
   <>

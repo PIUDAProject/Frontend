@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import { NoteListSection } from './components/note-list-section';
-import { NoteListSkeleton } from './components/skeletons';
+import { NoteListSection } from './_components/note-list-section';
+import { NoteListSkeleton } from './_components/skeletons';
 
 export default function NotePage() {
   return (

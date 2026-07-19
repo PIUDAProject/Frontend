@@ -3,10 +3,10 @@
 import { searchMedications } from '@/lib/data/note';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useDeferredValue, useState } from 'react';
-import { DateFilterBadge } from './components/date-filter-badge';
-import { RecentSearches, useRecentSearches } from './components/recent-searches';
-import { SearchInput } from './components/search-input';
-import { SearchResults } from './components/search-results';
+import { DateFilterBadge } from './_components/date-filter-badge';
+import { RecentSearches, useRecentSearches } from './_components/recent-searches';
+import { SearchInput } from './_components/search-input';
+import { SearchResults } from './_components/search-results';
 
 function NoteSearchContent() {
   const router = useRouter();
