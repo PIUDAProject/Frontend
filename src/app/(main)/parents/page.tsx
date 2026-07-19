@@ -1,4 +1,4 @@
-import ParentAdd, { type Parent } from './components/parent-add';
+import ParentAdd, { type Parent } from './_components/parent-add';
 
 async function getParents(): Promise<Parent[]> {
   return [

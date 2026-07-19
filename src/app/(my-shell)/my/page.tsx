@@ -1,5 +1,5 @@
-import { ParentListSection } from './components/parent-list-section';
-import { UserCard } from './components/user-card';
+import { ParentListSection } from './_components/parent-list-section';
+import { UserCard } from './_components/user-card';
 
 const MOCK_USER = { name: '김지수' };
 

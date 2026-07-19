@@ -1,10 +1,10 @@
-import { BottomNav } from '@/components/layout/BottomNav';
+import { BottomNav } from '@/components/layout/bottom-nav';
 import { ChevronLeft } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 
 const MedicationSheet = dynamic(() =>
-  import('@/components/layout/MedicationSheet').then((m) => m.MedicationSheet),
+  import('@/components/layout/medication-sheet').then((m) => m.MedicationSheet),
 );
 
 export default function ReportShellLayout({ children }: { children: React.ReactNode }) {

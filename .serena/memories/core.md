@@ -40,6 +40,6 @@ components.json   # shadcn/ui 설정 (style: new-york, rsc: true)
 - 부모님(parent) = secondary user (receives phone call only)
 - 약(medication) / 복약(adherence) / 복약 스케줄(medication schedule)
 
-Language rules · domain terms · Server/Client criteria → `mem:conventions`
+Language rules · domain terms · Server/Client criteria · route-group (shell/standalone) layout pattern → `mem:conventions`
 Stack details → `mem:tech_stack`
 Commands → `mem:suggested_commands`

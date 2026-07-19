@@ -1,16 +1,16 @@
 import { getTodayISO } from '@/lib/date';
 import { Suspense } from 'react';
-import { ChatFloatingButton } from './components/chat-floating-button';
-import { CurrentCardSection } from './components/current-card-section';
-import { ExpiryAlertSection } from './components/expiry-alert-section';
-import { MediCardSection } from './components/medi-card-section';
+import { ChatFloatingButton } from './_components/chat-floating-button';
+import { CurrentCardSection } from './_components/current-card-section';
+import { ExpiryAlertSection } from './_components/expiry-alert-section';
+import { MediCardSection } from './_components/medi-card-section';
 import {
   AlertSkeleton,
   CurrentCardSkeleton,
   MediCardSkeleton,
   WeekStripSkeleton,
-} from './components/skeletons';
-import { WeekStripSection } from './components/week-strip-section';
+} from './_components/skeletons';
+import { WeekStripSection } from './_components/week-strip-section';
 
 // 임시: 실제 로그인 구현 후 세션에서 읽어옴
 const TEMP_PATIENT_ID = 'patient-001';
