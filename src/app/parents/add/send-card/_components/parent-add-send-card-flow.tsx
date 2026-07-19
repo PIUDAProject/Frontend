@@ -1,10 +1,10 @@
 'use client';
 
-import { ResendLine } from '@/app/onboarding/send-card/components/ResendLine';
-import { SaveGuide } from '@/app/onboarding/send-card/components/SaveGuide';
-import { SendDoneDialog } from '@/app/onboarding/send-card/components/SendDoneDialog';
-import { SendProgress } from '@/app/onboarding/send-card/components/SendProgress';
-import { VCardPreview } from '@/app/onboarding/send-card/components/VCardPreview';
+import { ResendLine } from '@/components/send-card/resend-line';
+import { SaveGuide } from '@/components/send-card/save-guide';
+import { SendDoneDialog } from '@/components/send-card/send-done-dialog';
+import { SendProgress } from '@/components/send-card/send-progress';
+import { VCardPreview } from '@/components/send-card/v-card-preview';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import { toast } from 'sonner';

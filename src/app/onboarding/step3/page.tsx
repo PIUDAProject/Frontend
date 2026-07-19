@@ -1,5 +1,5 @@
-import { StepHeader } from '../components/StepHeader';
-import { MealTimeForm } from './components/MealTimeForm';
+import { StepHeader } from '@/components/parent-form/step-header';
+import { MealTimeForm } from './_components/meal-time-form';
 
 export default function Step3Page() {
   return (

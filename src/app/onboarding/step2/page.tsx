@@ -1,5 +1,5 @@
-import { StepHeader } from '../components/StepHeader';
-import { ParentRegisterForm } from './components/ParentRegisterForm';
+import { StepHeader } from '@/components/parent-form/step-header';
+import { ParentRegisterForm } from './_components/parent-register-form';
 
 export default function Step2Page() {
   return (

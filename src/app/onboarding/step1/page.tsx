@@ -1,5 +1,5 @@
-import { StepHeader } from '../components/StepHeader';
-import { PhoneVerifyForm } from './components/PhoneVerifyForm';
+import { StepHeader } from '@/components/parent-form/step-header';
+import { PhoneVerifyForm } from './_components/phone-verify-form';
 
 export default function Step1Page() {
   return (

@@ -1,12 +1,12 @@
 'use client';
 
+import { GenderSegmented, type Gender } from '@/components/parent-form/gender-segmented';
+import { BirthPickerDrawer, type Birth } from '@/components/ui/birth-picker-drawer';
 import { registerParent, requestParentCode, verifyParentCode } from '@/lib/actions/parent';
 import { formatPhone } from '@/lib/schema/phone';
 import { Calendar, CircleAlert, CircleCheck, RefreshCw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, useTransition } from 'react';
-import { BirthPickerDrawer, type Birth } from './BirthPickerDrawer';
-import { GenderSegmented, type Gender } from './GenderSegmented';
 
 type CodePhase = 'idle' | 'code-sent' | 'error' | 'verified';
 

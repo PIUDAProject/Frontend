@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { AppLogo } from './components/AppLogo';
+import { AppLogo } from './_components/app-logo';
 
 export default function OnboardingPage() {
   return (

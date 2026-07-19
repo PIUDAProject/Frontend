@@ -1,6 +1,6 @@
-import { CallCareBar } from '@/app/onboarding/send-card/components/CallCareBar';
+import { CallCareBar } from '@/components/send-card/call-care-bar';
 import { Suspense } from 'react';
-import { ParentAddSendCardFlow } from './components/parent-add-send-card-flow';
+import { ParentAddSendCardFlow } from './_components/parent-add-send-card-flow';
 
 const MOCK_CARD = {
   name: '부모님',

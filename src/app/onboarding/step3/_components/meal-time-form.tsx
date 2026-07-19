@@ -1,10 +1,10 @@
 'use client';
 
+import { TimePickerDrawer } from '@/components/ui/time-picker-drawer';
 import { saveMealTimes } from '@/lib/actions/parent';
 import { Clock, Moon, Sun, Sunrise } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState, useTransition } from 'react';
-import { TimePickerDrawer } from './TimePickerDrawer';
 
 type MealKey = 'morning' | 'noon' | 'night';
 type Meals = Record<MealKey, string>;

@@ -1,5 +1,5 @@
-import { StepHeader } from '@/app/onboarding/components/StepHeader';
-import { MealTimeAddForm } from './components/meal-time-add-form';
+import { StepHeader } from '@/components/parent-form/step-header';
+import { MealTimeAddForm } from './_components/meal-time-add-form';
 
 export default function ParentAddStep2Page() {
   return (

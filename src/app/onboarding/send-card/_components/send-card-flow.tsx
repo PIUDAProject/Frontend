@@ -1,13 +1,13 @@
 'use client';
 
+import { ResendLine } from '@/components/send-card/resend-line';
+import { SaveGuide } from '@/components/send-card/save-guide';
+import { SendDoneDialog } from '@/components/send-card/send-done-dialog';
+import { SendProgress } from '@/components/send-card/send-progress';
+import { VCardPreview } from '@/components/send-card/v-card-preview';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 import { toast } from 'sonner';
-import { ResendLine } from './ResendLine';
-import { SaveGuide } from './SaveGuide';
-import { SendDoneDialog } from './SendDoneDialog';
-import { SendProgress } from './SendProgress';
-import { VCardPreview } from './VCardPreview';
 
 const MODAL_SEND_DONE = 'send-done' as const;
 

@@ -1,7 +1,7 @@
-import { CallCareBar } from '@/app/onboarding/send-card/components/CallCareBar';
-import { SendCardFlow } from '@/app/onboarding/send-card/components/SendCardFlow';
+import { CallCareBar } from '@/components/send-card/call-care-bar';
 import { cookies } from 'next/headers';
 import { Suspense } from 'react';
+import { SendCardFlow } from './_components/send-card-flow';
 
 const DEFAULT_NAME = '부모님';
 const DEFAULT_RELATION = '보호 대상';

@@ -1,5 +1,5 @@
-import { StepHeader } from '@/app/onboarding/components/StepHeader';
-import { ParentAddForm } from './components/parent-add-form';
+import { StepHeader } from '@/components/parent-form/step-header';
+import { ParentAddForm } from './_components/parent-add-form';
 
 export default function ParentAddStep1Page() {
   return (

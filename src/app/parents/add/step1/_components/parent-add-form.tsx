@@ -1,6 +1,6 @@
 'use client';
 
-import { GenderSegmented, type Gender } from '@/app/onboarding/step2/components/GenderSegmented';
+import { GenderSegmented, type Gender } from '@/components/parent-form/gender-segmented';
 import { BirthPickerDrawer, type Birth } from '@/components/ui/birth-picker-drawer';
 import { formatPhone } from '@/lib/schema/phone';
 import { Calendar, CircleAlert, CircleCheck, RefreshCw } from 'lucide-react';

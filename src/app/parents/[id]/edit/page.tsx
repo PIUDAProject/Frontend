@@ -1,6 +1,6 @@
 import { Camera, ChevronLeft, UserRound } from 'lucide-react';
 import Link from 'next/link';
-import { ParentEditForm } from './components/parent-edit-form';
+import { ParentEditForm } from './_components/parent-edit-form';
 
 const MOCK_PARENTS: Record<
   string,
