@@ -1,6 +1,6 @@
+import { NoteMedItem } from '@/components/note-med-item';
 import type { NoteHospitalGroup } from '@/lib/data/types';
 import { Building2 } from 'lucide-react';
-import { NoteMedItem } from './note-med-item';
 import { NoteMoreMenu } from './note-more-menu';
 import { NoteReregisterButton } from './note-reregister-button';
 

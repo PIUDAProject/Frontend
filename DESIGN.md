@@ -286,6 +286,7 @@ The basic unit for containing information. Nesting is prohibited.
 - **Shadow:** 없음 — 다크 배경이 Canvas(99%)로부터의 시각적 분리를 자체 제공
 - **Corner:** rounded-xl (0.75rem); **Padding:** p-6 (1.5rem)
 - **Semantic:** `<article aria-label="{patientName}님 복약 현황">` — 스크린 리더 랜드마크
+- **재사용:** 약물안전리포트 화면의 "사용중인 약물 N건" 배너(웹·PDF 공통)도 동일한 다크 배경 변형을 사용한다. 홈 히어로 카드 전용이 아니라, Canvas보다 어두운 배경으로 시각적 강조가 필요한 요약형 배너에 공통으로 적용 가능하다.
 
 **구조 (위에서 아래):**
 

@@ -62,6 +62,8 @@
   --danger-bg: oklch(97% 0.018 27);
   --caution: var(--amber-500);
   --caution-bg: oklch(97% 0.025 80);
+  /* amber-500은 아이콘/면적용 밝은 톤이라 텍스트 대비가 부족(1.86:1) → 텍스트 전용 어두운 톤 별도 정의 */
+  --caution-text: oklch(50% 0.15 70);
   --status-active: var(--blue-600);
   --status-active-bg: var(--blue-50);
   --status-done: oklch(52% 0.14 155);
@@ -102,6 +104,11 @@
   /* 레이아웃 치수 — 고정 헤더/네비 높이 (safe-area 포함) */
   --header-height: calc(4.5rem + env(safe-area-inset-top));
   --nav-height: calc(4rem + max(0rem, env(safe-area-inset-bottom)));
+  /* 바텀 내비게이션 실제 렌더링 높이. BottomNav의 border-t(1px) + pt-2.5 + 등록하기 디스크(size-11 원 + gap-1.5 + 라벨 한 줄, 일반 탭보다 더 큰 항목) + pb 기준.
+     --nav-height는 일반 탭 기준이라 디스크보다 낮게 잡혀 있어, 바텀바 위에 정확히 붙여야 하는 플로팅 요소는 이 값을 사용 */
+  --bottom-nav-actual-height: calc(4.775rem + max(0.75rem, env(safe-area-inset-bottom)));
+  /* 리포트 화면 하단 우측 플로팅 PDF 다운로드 버튼(shadow-fab)에 콘텐츠가 가리지 않도록 확보하는 여백 */
+  --report-cta-clearance: 7rem;
 
   /* 홈 복약 현황 카드 — 의도된 다크 배경 변형 (DESIGN.md § Current Status Card 참고) */
   --card-current: var(--blue-800);
@@ -142,6 +149,7 @@
   --color-danger-bg: var(--danger-bg);
   --color-caution: var(--caution);
   --color-caution-bg: var(--caution-bg);
+  --color-caution-text: var(--caution-text);
   --color-status-active: var(--status-active);
   --color-status-active-bg: var(--status-active-bg);
   --color-status-done: var(--status-done);
