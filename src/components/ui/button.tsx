@@ -22,6 +22,8 @@ const buttonVariants = cva(
         lg: 'h-10 rounded-md px-8',
         icon: 'h-9 w-9',
         cta: 'h-14 w-full rounded-2xl px-6 font-bold shadow-fab',
+        // 확인/취소 2버튼 다이얼로그 전용 (h-9는 44px 탭 타겟에 못 미치고, cta는 w-full이라 나란히 배치 불가)
+        dialog: 'h-12 flex-1 rounded-xl text-sm font-semibold',
       },
     },
     defaultVariants: {
