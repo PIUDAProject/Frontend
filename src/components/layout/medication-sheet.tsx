@@ -12,8 +12,8 @@ import { ChevronRight, ClipboardPlus, PencilLine } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
-import type { ImageSource } from './ImageSourceSheet';
-import { ImageSourceSheet } from './ImageSourceSheet';
+import type { ImageSource } from './image-source-sheet';
+import { ImageSourceSheet } from './image-source-sheet';
 
 export function MedicationSheet() {
   const isOpen = useMedicationSheetStore((s) => s.isOpen);

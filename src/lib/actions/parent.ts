@@ -1,6 +1,6 @@
 'use server';
 
-import { mealTimeSchema } from '@/lib/schema/mealTime';
+import { mealTimeSchema } from '@/lib/schema/meal-time';
 import { parentSchema } from '@/lib/schema/parent';
 import { cookies } from 'next/headers';
 

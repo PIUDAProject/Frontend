@@ -1,10 +1,10 @@
-import { AppHeader } from '@/components/layout/AppHeader';
-import { BottomNav } from '@/components/layout/BottomNav';
+import { AppHeader } from '@/components/layout/app-header';
+import { BottomNav } from '@/components/layout/bottom-nav';
 import dynamic from 'next/dynamic';
 
 // Drawer JS 코드를 별도 청크로 분리 — 초기 번들에서 제외
 const MedicationSheet = dynamic(() =>
-  import('@/components/layout/MedicationSheet').then((m) => m.MedicationSheet),
+  import('@/components/layout/medication-sheet').then((m) => m.MedicationSheet),
 );
 
 export default function MainLayout({ children }: { children: React.ReactNode }) {

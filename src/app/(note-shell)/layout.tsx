@@ -1,9 +1,9 @@
-import { BottomNav } from '@/components/layout/BottomNav';
+import { BottomNav } from '@/components/layout/bottom-nav';
 import dynamic from 'next/dynamic';
 import { NoteSearchBar } from './note/components/note-search-bar';
 
 const MedicationSheet = dynamic(() =>
-  import('@/components/layout/MedicationSheet').then((m) => m.MedicationSheet),
+  import('@/components/layout/medication-sheet').then((m) => m.MedicationSheet),
 );
 
 export default function NoteShellLayout({ children }: { children: React.ReactNode }) {
